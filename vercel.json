@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/api/cron-01",
-      "schedule": "0 8 * * 1-5"
+      "schedule": "22 9 * * 1-5"
     },
     {
       "path": "/api/cron-02",
-      "schedule": "30 8 * * 1-5"
+      "schedule": "24 9 * * 1-5"
     }
   ]
 }
