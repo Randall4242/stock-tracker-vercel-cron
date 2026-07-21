@@ -3,9 +3,20 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 const REPO = 'Randall4242/mavis-output';
 const EVENT_TYPE = 'stock-trigger';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+function isAuthorized(req: VercelRequest): boolean {
+  // 1. Vercel Cron 触发（系统调用，带特定 User-Agent）
+  const ua = req.headers['user-agent'] || '';
+  if (typeof ua === 'string' && ua.includes('Vercel-Cron')) return true;
+
+  // 2. 外部调用带正确的 CRON_SECRET
   const auth = req.headers.authorization;
-  if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (auth === `Bearer ${process.env.CRON_SECRET}`) return true;
+
+  return false;
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!isAuthorized(req)) {
     return res.status(401).json({ error: 'unauthorized' });
   }
 
