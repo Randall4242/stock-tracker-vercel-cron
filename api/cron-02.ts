@@ -6,7 +6,7 @@ const EVENT_TYPE = 'stock-trigger';
 function isAuthorized(req: any): boolean {
   // 1. Vercel Cron 触发（系统调用，带特定 User-Agent）
   const ua = req.headers?.['user-agent'] || '';
-  if (typeof ua === 'string' && ua.includes('Vercel-Cron')) return true;
+  if (typeof ua === 'string' && ua.toLowerCase().includes('vercel-cron')) return true;
 
   // 2. 外部调用带正确的 CRON_SECRET
   const auth = req.headers?.authorization;
