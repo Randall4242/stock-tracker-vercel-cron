@@ -1,0 +1,10 @@
+{
+  "name": "stock-tracker-vercel-cron",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@vercel/node": "^3.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
